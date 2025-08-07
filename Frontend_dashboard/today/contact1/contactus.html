@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BLW Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="Logo.png" alt="BLW Logo">
+        <h2>BLW Portal</h2>
+      </div>
+      <ul>
+        <li><a href="contact.html" onclick="loadPage(event)">Contact Us</a></li>
+        <li><a href="officers.html" onclick="loadPage(event)">Senior Officers</a></li>
+        <li><a href="feedback.html" onclick="loadPage(event)">Feedback</a></li>
+        <li><a href="usermail.html" onclick="loadPage(event)">RailNet Mail Users</a></li>
+        <li><a href="rti.html" onclick="loadPage(event)">RTI</a></li>
+        <li><a href="help.html" onclick="loadPage(event)">Help</a></li>
+        <li><a href="railway.html" onclick="loadPage(event)">Other Railway Sites</a></li>
+      </ul>
+      <div class="sms-box">
+        <p>Indian Railway Enquiry<br>on<br><strong>SMS</strong></p>
+        <a href="http://www.indianrail.gov.in" target="_blank">
+          <img src="https://blw.indianrailways.gov.in/bannerfile/crisbanner.gif" alt="SMS Inquiry">
+        </a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="top-bar">
+        <h1>Welcome to Contact Us</h1>
+        <div class="actions">
+          <button onclick="bookmarkPage()">🔖 Bookmark</button>
+          <button onclick="mailPage()">📧 Mail</button>
+          <button onclick="window.print()">🖨️ Print</button>
+        </div>
+      </header>
+
+      <section id="content-area">
+        <!-- Dynamic content will load here -->
+        <h2></h2>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

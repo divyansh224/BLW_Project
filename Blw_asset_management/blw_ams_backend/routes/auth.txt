@@ -1,0 +1,60 @@
+const express = require("express");
+const router = express.Router();
+const db = require("../db/database");
+
+// 🧪 Login Route
+router.post("/login", (req, res) => {
+  const { user_id, password, department } = req.body;
+
+  if (!user_id || !password || !department) {
+    return res.status(400).json({ error: "Missing login fields" });
+  }
+  // SECURITY ONLY ADMIN 
+ if (department === "Administration" && user.user_id !== "admin") {
+  return res.status(403).json({ error: "Access denied: Only admin can view all departments" });
+}
+  db.get(
+    "SELECT * FROM users WHERE user_id = ? AND password = ? AND department = ?",
+    [user_id, password, department],
+    (err, user) => {
+      if (err) {
+        console.error("❌ DB error during login:", err.message);
+        return res.status(500).json({ error: "Database error" });
+      }
+
+      if (!user) {
+        return res.status(401).json({ error: "Invalid credentials" });
+      }
+
+      res.status(200).json({ message: "Login successful", role: user.role });
+    }
+  );
+});
+
+// 🆕 Signup Route
+router.post("/signup", (req, res) => {
+  const { department, name, user_id, password } = req.body;
+
+  if (!department || !user_id || !password) {
+    return res.status(400).json({ error: "Missing signup fields" });
+  }
+
+  const query = `
+    INSERT INTO users (user_id, password, role, department)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  db.run(query, [user_id, password, "Technician", department], function (err) {
+    if (err) {
+      if (err.message.includes("UNIQUE")) {
+        return res.status(409).json({ error: "User ID already exists" });
+      }
+      console.error("❌ DB error during signup:", err.message);
+      return res.status(500).json({ error: "Signup failed" });
+    }
+
+    res.status(200).json({ message: "Signup successful", role: "Technician" });
+  });
+});
+
+module.exports = router;

@@ -1,0 +1,90 @@
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const app = express();
+
+const inventoryDB = require('./inventory');  // Inventory DB
+const userDB = require('./database');            // User DB
+
+// 🌐 Middleware
+app.use(cors());
+app.use(express.json());
+
+// ✅ Serve static assets from frontend_dashboard
+app.use(express.static(path.join(__dirname, 'blw_login_full_background')));
+
+// 🌐 Direct Access to Login Page
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'blw_login_full_background', 'login.html'));
+});
+
+
+// 🧾 Get all inventory parts
+  app.get('/api/parts', (req, res) => {
+  inventoryDB.all('SELECT * FROM inventory', (err, rows) => {
+    if (err) return res.status(500).json({ error: 'Failed to fetch parts' });
+    res.json(rows);
+  });
+});
+
+// 🔁 Update part values
+app.post('/api/parts/update', (req, res) => {
+  const { rfid, field, value } = req.body;
+  const allowed = ['in_use', 'in_repair', 'available'];
+
+  if (!allowed.includes(field)) {
+    return res.status(400).json({ error: 'Invalid field' });
+  }
+
+  const query = `UPDATE inventory SET ${field} = ${field} + ? WHERE rfid = ?`;
+  inventoryDB.run(query, [value, rfid], function(err) {
+    if (err) return res.status(500).json({ error: 'Update failed' });
+    res.json({ message: 'Update successful' });
+  });
+});
+
+// 📊 Summary stats for dashboard
+app.get('/api/summary', (req, res) => {
+  const summaryQuery = `
+    SELECT 
+      SUM(in_use) AS in_use_total,
+      SUM(in_repair) AS in_repair_total,
+      SUM(available) AS available_total
+    FROM inventory
+  `;
+
+  inventoryDB.get(summaryQuery, (err, row) => {
+    if (err) return res.status(500).json({ error: 'Failed to fetch summary' });
+    res.json(row);
+  });
+});
+
+// 🔐 Login from user.db
+app.post('/api/login', (req, res) => {
+  const { user_id, password } = req.body;
+  const query = `SELECT * FROM users WHERE user_id = ? AND password = ?`;
+
+  userDB.get(query, [user_id, password], (err, row) => {
+    if (err || !row) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+    res.json({ message: 'Login success' });
+  });
+});
+
+//📝 Sign-Up from modal
+app.post('/api/signup', (req, res) => {
+  const { user_id, password, name } = req.body;
+  const query = `INSERT INTO users (user_id, password, name) VALUES (?, ?, ?)`;
+
+  userDB.run(query, [user_id, password, name], function(err) {
+    if (err) return res.status(500).json({ error: 'User may already exist or DB error' });
+    res.json({ message: 'Sign-up successful!' });
+  });
+});
+
+// 🟢 Start server
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
+});

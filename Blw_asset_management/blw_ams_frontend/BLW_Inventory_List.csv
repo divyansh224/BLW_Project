@@ -1,0 +1,134 @@
+Department,Item,Quantity
+Technical Training Centre (TTC),Training Tables,15
+Technical Training Centre (TTC),Chairs,40
+Technical Training Centre (TTC),Whiteboards,3
+Technical Training Centre (TTC),Marker Sets,10
+Technical Training Centre (TTC),Projectors,2
+Technical Training Centre (TTC),Desktop Computers,20
+Technical Training Centre (TTC),Tube Lights,25
+Technical Training Centre (TTC),Ceiling Fans,10
+Technical Training Centre (TTC),Air Conditioners,3
+Technical Training Centre (TTC),Printers,2
+Technical Training Centre (TTC),Laptops (Instructors),5
+Technical Training Centre (TTC),Tool Kits (Mechanical),10
+Technical Training Centre (TTC),Tool Kits (Electrical),10
+Technical Training Centre (TTC),Cabinets,5
+Technical Training Centre (TTC),First Aid Box,2
+Technical Training Centre (TTC),Digital Multimeters,8
+Technical Training Centre (TTC),Measuring Tapes,6
+Technical Training Centre (TTC),Attendance Registers,4
+Electronic Data Processing (EDP),Desktop Computers,25
+Electronic Data Processing (EDP),LAN Switches/Routers,5
+Electronic Data Processing (EDP),UPS/Inverter Units,5
+Electronic Data Processing (EDP),Printers/Scanners,3
+Electronic Data Processing (EDP),Network Cable Bundles,10
+Electronic Data Processing (EDP),Server Rack,2
+Electronic Data Processing (EDP),Ergonomic Chairs,25
+Electronic Data Processing (EDP),Office Tables,20
+Electronic Data Processing (EDP),AC Units,4
+Electronic Data Processing (EDP),Tube Lights,20
+Electronic Data Processing (EDP),Ceiling Fans,10
+Electronic Data Processing (EDP),CCTV Monitors,2
+Electronic Data Processing (EDP),External Hard Drives,6
+Electronic Data Processing (EDP),Pen Drives (secured),15
+Electronic Data Processing (EDP),Fire Extinguishers,2
+Electronic Data Processing (EDP),File Cabinets,4
+Electronic Data Processing (EDP),Software License Docs,20
+Planning Department,Computers,15
+Planning Department,Projector,1
+Planning Department,Conference Table,1
+Planning Department,Revolving Chairs,15
+Planning Department,File Cabinets,6
+Planning Department,Whiteboards,2
+Planning Department,Tube Lights,18
+Planning Department,Ceiling Fans,6
+Planning Department,AC Units,3
+Planning Department,Printer/Photocopier,2
+Planning Department,Wall Clocks,2
+Planning Department,Staplers,5
+Planning Department,Folders/Files,100
+Planning Department,Notepads,20
+Planning Department,Magnetic Pin Board,2
+Stores Department,Inventory Racks,30
+Stores Department,Labeling Machines,3
+Stores Department,Barcode Scanners,3
+Stores Department,Metal/Plastic Bins,100
+Stores Department,Work Tables,10
+Stores Department,Office Chairs,10
+Stores Department,File Cabinets,6
+Stores Department,Stock Registers,20
+Stores Department,Tube Lights,30
+Stores Department,Ceiling Fans,12
+Stores Department,CCTV Cameras,4
+Stores Department,Fire Extinguishers,3
+Stores Department,Desktop Computers,8
+Stores Department,Printers,2
+Stores Department,Shelving Tools,10
+Stores Department,Trolleys (Material),5
+Stores Department,Electronic Weighing Scale,2
+General Administration,Reception Desk,1
+General Administration,Visitor Chairs,10
+General Administration,Workstations,10
+General Administration,Office Chairs,15
+General Administration,Almirahs,5
+General Administration,Notice Boards,3
+General Administration,Tube Lights,20
+General Administration,Ceiling Fans,10
+General Administration,AC Units,3
+General Administration,Intercom Telephones,5
+General Administration,Water Cooler,1
+General Administration,Stationery Kits,20
+General Administration,Shredders,1
+General Administration,Dustbins,10
+General Administration,Tea Dispenser,1
+General Administration,Landline Phone Units,6
+Loco Training School (LTS),Simulator Machines,2
+Loco Training School (LTS),Training Benches,12
+Loco Training School (LTS),Student Chairs,30
+Loco Training School (LTS),LCD Projector,1
+Loco Training School (LTS),Desktop Computers,10
+Loco Training School (LTS),Laptop for Instructor,2
+Loco Training School (LTS),Fans,8
+Loco Training School (LTS),Tube Lights,15
+Loco Training School (LTS),Whiteboard,1
+Loco Training School (LTS),Railway Signaling Models,5
+Loco Training School (LTS),Fire Extinguisher,2
+Loco Training School (LTS),Tool Kits (Train Models),6
+Loco Training School (LTS),Posters/Charts,20
+Loco Training School (LTS),Multimedia Speakers,2
+Loco Training School (LTS),Filing Cabinets,3
+Loco Training School (LTS),Attendance Register,2
+Design Department,High-end Desktop Computers,12
+Design Department,CAD Software Licenses,15
+Design Department,Drawing Tables,6
+Design Department,Laser Printers,2
+Design Department,A3 Plotters,1
+Design Department,Ergonomic Chairs,12
+Design Department,Whiteboard,2
+Design Department,Notice Board (Magnetic),1
+Design Department,File Cabinets,4
+Design Department,Tube Lights,16
+Design Department,Ceiling Fans,6
+Design Department,AC Units,2
+Design Department,Stationery Sets,12
+Design Department,Measurement Tools,10
+Design Department,Dustbins,4
+Design Department,Wall Clocks,2
+Design Department,Books/Manuals (IR Standards),25
+Safety Department,Desktop Computers,5
+Safety Department,Fire Extinguishers (Spare),20
+Safety Department,First Aid Kits,10
+Safety Department,PPE Kits,50
+Safety Department,Safety Signage Boards,30
+Safety Department,Reflective Jackets,40
+Safety Department,Notice Boards,2
+Safety Department,Safety Training DVDs/Media,10
+Safety Department,Wall Posters,15
+Safety Department,Emergency Torchlights,10
+Safety Department,CCTV Monitors,3
+Safety Department,File Cabinets,2
+Safety Department,Tube Lights,10
+Safety Department,Ceiling Fans,5
+Safety Department,Chairs,6
+Safety Department,Safety Helmets (Display),10
+Safety Department,Fire Bucket Stand,4

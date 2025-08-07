@@ -1,0 +1,117 @@
+const express = require("express");
+const router = express.Router();
+const PDFDocument = require("pdfkit");
+const db = require("../db/database");
+
+router.get("/inventory/:department/pdf", (req, res) => {
+  const doc = new PDFDocument();
+  const department = req.params.department;
+
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", `attachment; filename=${department}_inventory_report.pdf`);
+  doc.pipe(res);
+
+  db.all(
+    "SELECT item, quantity FROM inventory WHERE department = ?",
+    [department],
+    (err, rows) => {
+      if (err || !rows || rows.length === 0) {
+        doc.text("No inventory data found for this department.");
+        doc.end();
+        return;
+      }
+      doc.fontSize(16).text(`Inventory Report for ${department}\n\n`);
+      rows.forEach((row, idx) => {
+        doc.fontSize(12).text(`${idx + 1}. ${row.item}: ${row.quantity}`);
+      });
+      doc.end();
+    }
+  );
+});
+// 🔹 Route 1: Full Asset Report
+router.get("/assets", (req, res) => {
+  const doc = new PDFDocument();
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", "attachment; filename=asset_report.pdf");
+  doc.pipe(res);
+
+  doc.fontSize(18).text("BLW Asset Report", { align: "center" });
+  doc.moveDown();
+
+  db.all("SELECT * FROM assets", [], (err, assets) => {
+    if (err || !assets) {
+      doc.text("Unable to load asset data.");
+      doc.end();
+      return;
+    }
+
+    let processed = 0;
+
+    assets.forEach((asset, index) => {
+      const query = `
+        SELECT date, technician FROM maintenance_logs
+        WHERE assetId = ? ORDER BY date DESC LIMIT 1
+      `;
+
+      db.get(query, [asset.id], (err, log) => {
+        const lastMaint = log
+          ? `${log.date} by ${log.technician}`
+          : asset.lastMaintenance || "N/A";
+
+        doc.fontSize(12).text(`${index + 1}. ID: ${asset.id}`);
+        doc.text(`Name: ${asset.name}`);
+        doc.text(`Category: ${asset.category}`);
+        doc.text(`Location: ${asset.location}`);
+        doc.text(`Status: ${asset.status}`);
+        doc.text(`Last Maintenance: ${lastMaint}`);
+        doc.moveDown();
+
+        processed++;
+        if (processed === assets.length) doc.end();
+      });
+    });
+  });
+});
+
+
+// 🔹 Route 2: Individual Asset Report (for search-based export)
+router.get("/assets/:id", (req, res) => {
+  const doc = new PDFDocument();
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", `attachment; filename=asset_${req.params.id}_report.pdf`);
+  doc.pipe(res);
+
+  doc.fontSize(18).text("BLW AMS - Individual Asset Report", { align: "center" });
+  doc.moveDown();
+
+  const assetId = req.params.id;
+
+  db.get("SELECT * FROM assets WHERE id = ?", [assetId], (err, asset) => {
+    if (err || !asset) {
+      doc.text("Asset not found.");
+      doc.end();
+      return;
+    }
+
+    db.get(
+      "SELECT date, technician FROM maintenance_logs WHERE assetId = ? ORDER BY date DESC LIMIT 1",
+      [assetId],
+      (err, log) => {
+        const lastMaint = log
+          ? `${log.date} by ${log.technician}`
+          : asset.lastMaintenance || "N/A";
+
+        doc.fontSize(12).text(`ID: ${asset.id}`);
+        doc.text(`Name: ${asset.name}`);
+        doc.text(`Category: ${asset.category}`);
+        doc.text(`Location: ${asset.location}`);
+        doc.text(`Status: ${asset.status}`);
+        doc.text(`Last Maintenance: ${lastMaint}`);
+        doc.end();
+      }
+    );
+  });
+});
+// ...existing code...
+
+module.exports = router;

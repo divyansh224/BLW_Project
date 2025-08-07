@@ -1,0 +1,28 @@
+const db = require("./database");
+
+const inventory = {
+      "Design Department": [["High-end Desktop Computers", 12], ["CAD Software Licenses", 15], ["Drawing Tables", 6], ["Laser Printers", 2], ["A3 Plotters", 1], ["Ergonomic Chairs", 12], ["Whiteboard", 2], ["Notice Board (Magnetic)", 1], ["File Cabinets", 4], ["Tube Lights", 16], ["Ceiling Fans", 6], ["AC Units", 2], ["Stationery Sets", 12], ["Measurement Tools", 10], ["Dustbins", 4], ["Wall Clocks", 2], ["Books/Manuals (IR Standards)", 25]],
+      "Electronic Data Processing (EDP)": [["Desktop Computers", 25], ["LAN Switches/Routers", 5], ["UPS/Inverter Units", 5], ["Printers/Scanners", 3], ["Network Cable Bundles", 10], ["Server Rack", 2], ["Ergonomic Chairs", 25], ["Office Tables", 20], ["AC Units", 4], ["Tube Lights", 20], ["Ceiling Fans", 10], ["CCTV Monitors", 2], ["External Hard Drives", 6], ["Pen Drives (secured)", 15], ["Fire Extinguishers", 2], ["File Cabinets", 4], ["Software License Docs", 20]],
+      "General Administration": [["Reception Desk", 1], ["Visitor Chairs", 10], ["Workstations", 10], ["Office Chairs", 15], ["Almirahs", 5], ["Notice Boards", 3], ["Tube Lights", 20], ["Ceiling Fans", 10], ["AC Units", 3], ["Intercom Telephones", 5], ["Water Cooler", 1], ["Stationery Kits", 20], ["Shredders", 1], ["Dustbins", 10], ["Tea Dispenser", 1], ["Landline Phone Units", 6]],
+      "Loco Training School (LTS)": [["Simulator Machines", 2], ["Training Benches", 12], ["Student Chairs", 30], ["LCD Projector", 1], ["Desktop Computers", 10], ["Laptop for Instructor", 2], ["Fans", 8], ["Tube Lights", 15], ["Whiteboard", 1], ["Railway Signaling Models", 5], ["Fire Extinguisher", 2], ["Tool Kits (Train Models)", 6], ["Posters/Charts", 20], ["Multimedia Speakers", 2], ["Filing Cabinets", 3], ["Attendance Register", 2]],
+      "Planning Department": [["Computers", 15], ["Projector", 1], ["Conference Table", 1], ["Revolving Chairs", 15], ["File Cabinets", 6], ["Whiteboards", 2], ["Tube Lights", 18], ["Ceiling Fans", 6], ["AC Units", 3], ["Printer/Photocopier", 2], ["Wall Clocks", 2], ["Staplers", 5], ["Folders/Files", 100], ["Notepads", 20], ["Magnetic Pin Board", 2]],
+      "Safety Department": [["Desktop Computers", 5], ["Fire Extinguishers (Spare)", 20], ["First Aid Kits", 10], ["PPE Kits", 50], ["Safety Signage Boards", 30], ["Reflective Jackets", 40], ["Notice Boards", 2], ["Safety Training DVDs/Media", 10], ["Wall Posters", 15], ["Emergency Torchlights", 10], ["CCTV Monitors", 3], ["File Cabinets", 2], ["Tube Lights", 10], ["Ceiling Fans", 5], ["Chairs", 6], ["Safety Helmets (Display)", 10], ["Fire Bucket Stand", 4]],
+      "Stores Department": [["Inventory Racks", 30], ["Labeling Machines", 3], ["Barcode Scanners", 3], ["Metal/Plastic Bins", 100], ["Work Tables", 10], ["Office Chairs", 10], ["File Cabinets", 6], ["Stock Registers", 20], ["Tube Lights", 30], ["Ceiling Fans", 12], ["CCTV Cameras", 4], ["Fire Extinguishers", 3], ["Desktop Computers", 8], ["Printers", 2], ["Shelving Tools", 10], ["Trolleys (Material)", 5], ["Electronic Weighing Scale", 2]],
+      "Technical Training Centre (TTC)": [["Training Tables", 15], ["Chairs", 40], ["Whiteboards", 3], ["Marker Sets", 10], ["Projectors", 2], ["Desktop Computers", 20], ["Tube Lights", 25], ["Ceiling Fans", 10], ["Air Conditioners", 3], ["Printers", 2], ["Laptops (Instructors)", 5], ["Tool Kits (Mechanical)", 10], ["Tool Kits (Electrical)", 10], ["Cabinets", 5], ["First Aid Box", 2], ["Digital Multimeters", 8], ["Measuring Tapes", 6], ["Attendance Registers", 4]]
+    };
+db.run("DELETE FROM inventory", err => {
+  if (err) console.error("Error clearing inventory:", err.message);
+});
+for (const dept in inventory) {
+  inventory[dept].forEach(([item, quantity]) => {
+    db.run(
+      "INSERT INTO inventory (department, item, quantity) VALUES (?, ?, ?)",
+      [dept, item, quantity],
+      err => {
+        if (err) console.error(`Error inserting ${item} for ${dept}:`, err.message);
+      }
+    );
+  });
+}
+
+console.log("✅ Inventory data seeded.");

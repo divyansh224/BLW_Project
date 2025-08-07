@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Electronics Department Inventory</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      background-color: #ffcc00;
+      color: #000;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 30px;
+    }
+
+    .card {
+      background-color: #1a1a1a;
+      border: 2px solid #ffcc00;
+      width: 270px;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background-color: #333;
+      box-shadow: 0 0 12px #ffcc00;
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .inventory-table {
+      margin: 40px auto;
+      width: 90%;
+      border-collapse: collapse;
+      background-color: #111;
+    }
+
+    .inventory-table th, .inventory-table td {
+      border: 1px solid #ffcc00;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .inventory-table th {
+      background-color: #ffcc00;
+      color: #000;
+    }
+
+    .inventory-table tr:hover {
+      background-color: #222;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Electronics Department - Office Asset & Inventory Management</h1>
+  </header>
+
+  <div class="container">
+    <div class="card">
+     <img src="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" alt="Oscilloscope">
+      <h3>Oscilloscope</h3>
+      <p>Waveform Monitoring Tool</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/10013/10013980.png" alt="Soldering Station">
+      <h3>Soldering Station</h3>
+      <p>PCB & Circuit Assembly</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/854/854894.png" alt="Signal Generator">
+      <h3>Signal Generator</h3>
+      <p>Test & Simulation Equipment</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3176/3176361.png" alt="Digital Storage">
+      <h3>Digital Storage</h3>
+      <p>Office Data Backup Device</p>
+    </div>
+  </div>
+
+  <table class="inventory-table">
+    <thead>
+      <tr>
+        <th>Equipment</th>
+        <th>Quantity</th>
+        <th>Location</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Oscilloscope</td>
+        <td>3</td>
+        <td>Lab E1</td>
+        <td>Operational</td>
+      </tr>
+      <tr>
+        <td>Soldering Station</td>
+        <td>5</td>
+        <td>Assembly Room</td>
+        <td>In Use</td>
+      </tr>
+      <tr>
+        <td>Signal Generator</td>
+        <td>2</td>
+        <td>Testing Bench</td>
+        <td>Available</td>
+      </tr>
+      <tr>
+        <td>Digital Storage</td>
+        <td>10</td>
+        <td>Server Room</td>
+        <td>Backup</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

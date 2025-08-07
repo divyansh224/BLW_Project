@@ -1,0 +1,49 @@
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const path = require("path");
+
+const app = express();
+
+// 🔧 Middlewares
+app.use(cors());
+app.use(bodyParser.json());
+
+// 🔗 Route Imports
+const inventoryRoutes = require("./routes/inventory");
+const authRoutes = require("./routes/auth");
+const assetRoutes = require("./routes/assets");
+const maintenanceRoutes = require("./routes/maintenance");
+const reportRoutes = require("./routes/reports");
+//const inventoryRoutes = require("./routes/inventory");
+
+// 🌐 Serve Frontend Files (login.html, index.html, etc.)
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../blw_ams_frontend")));
+
+// 🚀 Route Mounting
+app.use("/inventory", inventoryRoutes);
+app.use("/auth", authRoutes);              // /auth/login, /auth/signup
+app.use("/assets", assetRoutes);           // Asset APIs
+app.use("/maintenance", maintenanceRoutes);// Maintenance APIs
+app.use("/reports", reportRoutes);         // PDF generation APIs
+//app.use("/inventory", inventoryRoutes);
+
+
+// Default route -> login page
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../blw_ams_frontend/login.html"));
+});
+
+
+// 🧯 Global Error Handler
+app.use((err, req, res, next) => {
+  console.error("❌ Server Error:", err.message);
+  res.status(500).json({ error: "Internal Server Error" });
+});
+
+// 🟢 Server Start
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ BLW backend running on http://localhost:${PORT}`);
+});

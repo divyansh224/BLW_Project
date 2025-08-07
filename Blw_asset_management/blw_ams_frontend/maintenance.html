@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLW Asset Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" href="/assets/logo.png" type="image/png" />
+</head>
+<body class="bg-gray-100 text-gray-900 flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-900 text-white min-h-screen p-5">
+    <h1 class="text-2xl font-bold mb-10">BLW AMS</h1>
+    <nav class="space-y-4">
+      <a href="#" class="block hover:bg-blue-700 p-2 rounded">📁 Assets</a>
+      <a href="#" class="block hover:bg-blue-700 p-2 rounded">🔧 Maintenance</a>
+      <a href="#" class="block hover:bg-blue-700 p-2 rounded">🔁 Transfers</a>
+      <a href="http://localhost:3000/reports/assets/all" target="_blank" class="block hover:bg-blue-700 p-2 rounded">📊 Reports</a>
+      <button
+       onclick="openAssetModal()"
+      class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4"
+>
+  ➕ Register New Asset
+</button>
+<button onclick="logout()" class="btn btn-danger">Log Out</button>
+<button
+  onclick="printSearchedAsset()"
+  class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded"
+>
+  🖨️ Print Report for Searched Asset
+</button>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold">Dashboard</h2>
+      <div class="flex items-center space-x-4">
+        <span class="text-gray-600">Hello, Admin</span>
+        <img
+          src="assets/logo.png"
+          alt="Profile"
+          id="profileImage"
+          class="w-12 h-12 rounded-full shadow-md border-2 border-blue-800 cursor-pointer"
+        />
+      </div>
+    </header>
+
+    <!-- Profile Modal -->
+    <div
+      id="profileModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+    >
+      <div class="bg-white p-4 rounded-full shadow-xl">
+        <img
+          src="assets/logo.png"
+          alt="Enlarged Profile"
+          class="w-48 h-48 rounded-full border-4 border-blue-800"
+        />
+      </div>
+    </div>
+
+    <!-- Cards Row -->
+    <div class="grid grid-cols-4 gap-4 mb-6">
+      <div class="bg-white shadow p-4 rounded-lg">
+        <h3 class="text-lg font-medium text-gray-700">Total Assets</h3>
+        <p class="text-2xl font-bold mt-2">128</p>
+      </div>
+      <!-- Add other cards for Maintenance, Transfers, etc -->
+    </div>
+
+    <!-- Table Container -->
+    <section id="asset-table" class="bg-white p-4 rounded-lg shadow">
+      <h3 class="text-lg font-semibold mb-4">Asset Overview</h3>
+      <div class="overflow-x-auto">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search assets..."
+          class="mb-4 p-2 border border-gray-300 rounded w-full"
+        />
+        <table class="min-w-full bg-white">
+          <thead>
+            <tr class="bg-gray-200 text-gray-700">
+              <th class="py-2 px-4">Asset ID</th>
+              <th class="py-2 px-4">Name</th>
+              <th class="py-2 px-4">Category</th>
+              <th class="py-2 px-4">Location</th>
+              <th class="py-2 px-4">Status</th>
+              <th class="py-2 px-4">Last Maintenance</th>
+            </tr>
+          </thead>
+          <tbody id="assetTableBody">
+            <!-- JS will inject rows with a maintenance button -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+  <!--Asset Registeration model-->
+  <div
+  id="assetModal"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+>
+  <div class="bg-white rounded-lg p-6 w-full max-w-xl shadow-xl">
+    <h3 class="text-xl font-semibold mb-4">Register New Asset</h3>
+    <form id="assetForm" class="space-y-4">
+      <input type="text" id="assetId" placeholder="Asset ID" class="w-full p-2 border rounded" required />
+      <input type="text" id="name" placeholder="Name" class="w-full p-2 border rounded" required />
+      <input type="text" id="category" placeholder="Category" class="w-full p-2 border rounded" required />
+      <input type="text" id="location" placeholder="Location" class="w-full p-2 border rounded" required />
+      <input type="text" id="status" placeholder="Status" class="w-full p-2 border rounded" required />
+      <label for ="lastMaintenance" class="block text-sm font-bold text-gray-800">Last Maintenance</label>
+      <input type="date" id="lastMaintenance" class="w-full p-2 border rounded" required />
+      <!-- Optional Fields -->
+       <lable for="purchaseDate" class="block text-sm font-bold text-gray-800">Purchase Date</lable>
+      <input type="date" id="purchaseDate" placeholder="Purchase Date" class="w-full p-2 border rounded" />
+      <label for="warrantyExpiry" class="block text-sm font-bold text-gray-800">Warranty Expiry</label>
+      <input type="date" id="warrantyExpiry" placeholder="Warranty Expiry" class="w-full p-2 border rounded" />
+      <input type="text" id="assignedUser" placeholder="Assigned User" class="w-full p-2 border rounded" />
+      <div class="flex justify-end space-x-2 mt-4">
+        <button type="button" onclick="closeAssetModal()" class="px-4 py-2 bg-gray-400 text-white rounded">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!--End of asset registeration model-->
+<p><span id="username"></span></p>
+<!-- Edit Modal -->
+<div
+  id="editAssetModal"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+>
+  <div class="bg-white rounded-lg p-6 w-full max-w-xl shadow-xl">
+    <h3 class="text-xl font-semibold mb-4">Edit Asset</h3>
+    <form id="editAssetForm" class="space-y-4">
+      <label class="block text-sm font-bold text-gray-800">Name</label>
+      <input type="text" id="editName" class="w-full p-2 border rounded" required />
+
+      <label class="block text-sm font-bold text-gray-800">Category</label>
+      <input type="text" id="editCategory" class="w-full p-2 border rounded" required />
+
+      <label class="block text-sm font-bold text-gray-800">Location</label>
+      <input type="text" id="editLocation" class="w-full p-2 border rounded" required />
+
+      <label class="block text-sm font-bold text-gray-800">Status</label>
+      <input type="text" id="editStatus" class="w-full p-2 border rounded" required />
+
+      <label class="block text-sm font-bold text-gray-800">Last Maintenance</label>
+      <input type="date" id="editLastMaintenance" class="w-full p-2 border rounded" required />
+
+      <div class="flex justify-end space-x-2 mt-4">
+        <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-gray-400 text-white rounded">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-yellow-600 text-white rounded">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Maintenance Log Modal -->
+<div
+  id="maintenanceModal"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+>
+  <div class="bg-white rounded-lg p-6 w-full max-w-xl shadow-xl">
+    <h3 class="text-xl font-semibold mb-4">Log Maintenance</h3>
+    <form id="maintenanceForm" class="space-y-4">
+      <input type="text" id="maintDescription" placeholder="Description" class="w-full p-2 border rounded" required />
+      <input type="text" id="maintTechnician" placeholder="Technician Name" class="w-full p-2 border rounded" required />
+      <label for="maintDate" class="block text-sm font-bold text-gray-800">Maintenance Date</label>
+      <input type="date" id="maintDate" class="w-full p-2 border rounded" required />
+      <div class="flex justify-end space-x-2 mt-4">
+        <button type="button" onclick="closeMaintenanceModal()" class="px-4 py-2 bg-gray-400 text-white rounded">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Log</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

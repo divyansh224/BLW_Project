@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BLW Full Inventory Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f7fa;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 30px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #2980b9;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+<script>
+  function filterTable() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let department = document.getElementById("departmentFilter").value;
+    let table = document.querySelector("table");
+    let rows = table.getElementsByTagName("tr");
+    for (let i = 1; i < rows.length; i++) {
+      let cells = rows[i].getElementsByTagName("td");
+      if (cells.length < 3) continue;
+      let matchesSearch = Array.from(cells).some(cell => cell.innerText.toLowerCase().includes(input));
+      let matchesDepartment = !department || cells[2].innerText === department;
+      rows[i].style.display = (matchesSearch && matchesDepartment) ? "" : "none";
+    }
+  }
+      }
+      rows[i].style.display = match ? "" : "none";
+    }
+  }
+</script>
+</head>
+<body>
+  <div style="margin-bottom: 10px;">
+    <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for parts..." style="padding: 10px; width: 100%; max-width: 400px; font-size: 16px;">
+    <select id="departmentFilter" onchange="filterTable()" style="padding: 10px; font-size: 16px; margin-top: 10px;">
+      <option value="">All Departments</option>
+      <option>Mechanical</option>
+      <option>Electrical</option>
+      <option>Repair & Overhaul</option>
+      <option>Welding Shop</option>
+      <option>Testing Lab</option>
+      <option>Assembly</option>
+      <option>Stores</option>
+    </select>
+  </div>
+  <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for parts..." style="margin-bottom: 20px; padding: 10px; width: 100%; max-width: 400px; font-size: 16px;">
+  <h2>BLW Spare Parts Inventory - Full List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Part Name</th>
+        <th>Department</th>
+        <th>Available</th>
+        <th>In Use</th>
+        <th>In Repair</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1001</td><td>Traction Motor Frame</td><td>Mechanical</td><td>15</td><td>28</td><td>3</td></tr>
+      <tr><td>1002</td><td>Axle</td><td>Mechanical</td><td>22</td><td>30</td><td>5</td></tr>
+      <tr><td>1003</td><td>Gear Box Housing</td><td>Mechanical</td><td>10</td><td>25</td><td>7</td></tr>
+      <tr><td>1004</td><td>Brake Cylinder</td><td>Mechanical</td><td>18</td><td>32</td><td>2</td></tr>
+      <tr><td>1005</td><td>Bearing Cap</td><td>Mechanical</td><td>30</td><td>40</td><td>4</td></tr>
+      <tr><td>1006</td><td>Bogies</td><td>Mechanical</td><td>5</td><td>18</td><td>2</td></tr>
+      <tr><td>1007</td><td>Couplers</td><td>Mechanical</td><td>12</td><td>20</td><td>3</td></tr>
+      <tr><td>1008</td><td>Wheel Sets</td><td>Mechanical</td><td>10</td><td>24</td><td>5</td></tr>
+      <tr><td>1009</td><td>Buffer Assembly</td><td>Mechanical</td><td>9</td><td>12</td><td>1</td></tr>
+      <tr><td>1010</td><td>Radiator Fan</td><td>Mechanical</td><td>8</td><td>15</td><td>4</td></tr>
+      <tr><td>1011</td><td>Motor Mount Bracket</td><td>Mechanical</td><td>14</td><td>20</td><td>3</td></tr>
+      <tr><td>1012</td><td>Air Reservoir</td><td>Mechanical</td><td>20</td><td>18</td><td>2</td></tr>
+      <tr><td>1013</td><td>Sand Box</td><td>Mechanical</td><td>12</td><td>14</td><td>1</td></tr>
+      <tr><td>1014</td><td>Axle Box Housing</td><td>Mechanical</td><td>6</td><td>9</td><td>2</td></tr>
+      <tr><td>1015</td><td>Brake Shoe</td><td>Mechanical</td><td>40</td><td>50</td><td>0</td></tr>
+      <tr><td>1016</td><td>Suspension Spring</td><td>Mechanical</td><td>18</td><td>24</td><td>1</td></tr>
+      <tr><td>1017</td><td>Equalizing Beam</td><td>Mechanical</td><td>9</td><td>11</td><td>2</td></tr>
+      <tr><td>1018</td><td>Side Bearer</td><td>Mechanical</td><td>13</td><td>17</td><td>1</td></tr>
+      <tr><td>1019</td><td>Brake Hanger</td><td>Mechanical</td><td>7</td><td>8</td><td>0</td></tr>
+      <tr><td>1020</td><td>Traction Bar</td><td>Mechanical</td><td>4</td><td>6</td><td>1</td></tr>
+      <tr><td>1021</td><td>Traction Motor</td><td>Electrical</td><td>14</td><td>26</td><td>6</td></tr>
+      <tr><td>1022</td><td>Armature Coil</td><td>Electrical</td><td>20</td><td>30</td><td>5</td></tr>
+      <tr><td>1023</td><td>Rectifier Unit</td><td>Electrical</td><td>11</td><td>17</td><td>2</td></tr>
+      <tr><td>1024</td><td>Circuit Breaker</td><td>Electrical</td><td>18</td><td>22</td><td>1</td></tr>
+<tr><td>1025</td><td>Control Panel</td><td>Electrical</td><td>6</td><td>15</td><td>3</td></tr>
+<tr><td>1026</td><td>Power Converter</td><td>Electrical</td><td>13</td><td>19</td><td>2</td></tr>
+<tr><td>1027</td><td>Pantograph</td><td>Electrical</td><td>7</td><td>10</td><td>1</td></tr>
+<tr><td>1028</td><td>Insulator</td><td>Electrical</td><td>15</td><td>20</td><td>0</td></tr>
+<tr><td>1029</td><td>Cable Harness</td><td>Electrical</td><td>25</td><td>35</td><td>4</td></tr>
+<tr><td>1030</td><td>Battery Set</td><td>Electrical</td><td>9</td><td>12</td><td>2</td></tr>
+<tr><td>1031</td><td>Blower Motor</td><td>Electrical</td><td>11</td><td>16</td><td>1</td></tr>
+<tr><td>1032</td><td>Power Contactor</td><td>Electrical</td><td>5</td><td>9</td><td>1</td></tr>
+<tr><td>1033</td><td>Intercooler Fan Motor</td><td>Electrical</td><td>6</td><td>8</td><td>0</td></tr>
+<tr><td>1034</td><td>Fuse Box</td><td>Electrical</td><td>14</td><td>18</td><td>1</td></tr>
+<tr><td>1035</td><td>Busbar</td><td>Electrical</td><td>12</td><td>10</td><td>2</td></tr>
+<tr><td>1041</td><td>Welding Torch</td><td>Repair & Overhaul</td><td>7</td><td>8</td><td>1</td></tr>
+<tr><td>1042</td><td>Hydraulic Press</td><td>Repair & Overhaul</td><td>4</td><td>6</td><td>2</td></tr>
+<tr><td>1043</td><td>Drilling Machine</td><td>Repair & Overhaul</td><td>3</td><td>5</td><td>2</td></tr>
+<tr><td>1044</td><td>Lifting Jack</td><td>Repair & Overhaul</td><td>6</td><td>9</td><td>1</td></tr>
+<tr><td>1045</td><td>Grinding Machine</td><td>Repair & Overhaul</td><td>2</td><td>4</td><td>1</td></tr>
+<tr><td>1061</td><td>Welding Rod</td><td>Welding Shop</td><td>50</td><td>100</td><td>0</td></tr>
+<tr><td>1062</td><td>Welding Machine</td><td>Welding Shop</td><td>8</td><td>10</td><td>2</td></tr>
+<tr><td>1063</td><td>Welding Helmet</td><td>Welding Shop</td><td>20</td><td>15</td><td>1</td></tr>
+<tr><td>1081</td><td>Insulation Tester</td><td>Testing Lab</td><td>3</td><td>6</td><td>0</td></tr>
+<tr><td>1082</td><td>High Voltage Tester</td><td>Testing Lab</td><td>2</td><td>4</td><td>1</td></tr>
+<tr><td>1083</td><td>Resistance Meter</td><td>Testing Lab</td><td>5</td><td>7</td><td>2</td></tr>
+<tr><td>1101</td><td>Nut & Bolts Set</td><td>Assembly</td><td>100</td><td>120</td><td>0</td></tr>
+<tr><td>1102</td><td>Spring Washer</td><td>Assembly</td><td>75</td><td>85</td><td>0</td></tr>
+<tr><td>1121</td><td>Lubricant Oil</td><td>Stores</td><td>60</td><td>80</td><td>0</td></tr>
+<tr><td>1122</td><td>Coolant</td><td>Stores</td><td>55</td><td>70</td><td>0</td></tr>
+    <tr><td>1123</td><td>Cleaning Solvent</td><td>Stores</td><td>40</td><td>45</td><td>0</td></tr>
+<tr><td>1124</td><td>Grease Gun</td><td>Stores</td><td>20</td><td>25</td><td>1</td></tr>
+<tr><td>1125</td><td>Safety Gloves</td><td>Stores</td><td>200</td><td>150</td><td>0</td></tr>
+<tr><td>1126</td><td>Packing Material</td><td>Stores</td><td>300</td><td>280</td><td>0</td></tr>
+<tr><td>1127</td><td>Identification Tags</td><td>Stores</td><td>100</td><td>120</td><td>0</td></tr>
+<tr><td>1128</td><td>Toolbox</td><td>Stores</td><td>10</td><td>10</td><td>1</td></tr>
+<tr><td>1129</td><td>Spare Keys</td><td>Stores</td><td>30</td><td>35</td><td>0</td></tr>
+<tr><td>1130</td><td>Inventory Bin</td><td>Stores</td><td>50</td><td>55</td><td>0</td></tr>
+<tr><td>1201</td><td>Side Frame</td><td>Mechanical</td><td>18</td><td>22</td><td>2</td></tr>
+<tr><td>1202</td><td>Traction Link</td><td>Mechanical</td><td>12</td><td>18</td><td>1</td></tr>
+<tr><td>1203</td><td>Bogie Pivot Pin</td><td>Mechanical</td><td>7</td><td>10</td><td>0</td></tr>
+<tr><td>1204</td><td>Buffer Pad</td><td>Mechanical</td><td>14</td><td>16</td><td>1</td></tr>
+<tr><td>1205</td><td>Draft Gear</td><td>Mechanical</td><td>5</td><td>8</td><td>0</td></tr>
+<tr><td>1206</td><td>Center Pivot Bush</td><td>Mechanical</td><td>6</td><td>6</td><td>0</td></tr>
+<tr><td>1207</td><td>Brake Lever</td><td>Mechanical</td><td>8</td><td>12</td><td>1</td></tr>
+<tr><td>1208</td><td>Wheel Hub</td><td>Mechanical</td><td>10</td><td>14</td><td>1</td></tr>
+<tr><td>1209</td><td>Suspension Tube</td><td>Mechanical</td><td>4</td><td>6</td><td>0</td></tr>
+<tr><td>1210</td><td>Axle End Cap</td><td>Mechanical</td><td>6</td><td>10</td><td>1</td></tr>
+<tr><td>1211</td><td>Field Coil</td><td>Electrical</td><td>15</td><td>20</td><td>2</td></tr>
+<tr><td>1212</td><td>Interlock Relay</td><td>Electrical</td><td>10</td><td>14</td><td>1</td></tr>
+<tr><td>1213</td><td>LED Module</td><td>Electrical</td><td>30</td><td>40</td><td>0</td></tr>
+<tr><td>1214</td><td>Fuse Link</td><td>Electrical</td><td>50</td><td>60</td><td>0</td></tr>
+<tr><td>1215</td><td>Control Switch</td><td>Electrical</td><td>12</td><td>18</td><td>2</td></tr>
+<tr><td>1216</td><td>TCMS Processor</td><td>Electrical</td><td>3</td><td>5</td><td>1</td></tr>
+<tr><td>1217</td><td>Switchgear Housing</td><td>Electrical</td><td>6</td><td>9</td><td>0</td></tr>
+<tr><td>1218</td><td>Light Indicator</td><td>Electrical</td><td>14</td><td>16</td><td>0</td></tr>
+<tr><td>1219</td><td>Current Sensor</td><td>Electrical</td><td>5</td><td>6</td><td>0</td></tr>
+<tr><td>1220</td><td>Voltage Detector</td><td>Electrical</td><td>4</td><td>7</td><td>1</td></tr>
+</tbody>
+  </table>
+</body>
+</html>

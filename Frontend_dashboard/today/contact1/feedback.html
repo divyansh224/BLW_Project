@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      margin: 0;
+      padding: 20px;
+      color: yellow;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: auto;
+      background-color: #111;
+      border: 3px solid yellow;
+      padding: 20px;
+      box-shadow: 5px 5px 15px rgba(255, 255, 0, 0.3);
+      color: yellow;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: yellow;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: yellow;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      background-color: black;
+      color: yellow;
+      border: 1px solid yellow;
+      border-radius: 4px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    input:hover, textarea:hover, select:hover {
+      background-color: yellow;
+      color: black;
+    }
+
+    button {
+      width: 48%;
+      padding: 10px;
+      margin-top: 15px;
+      background-color: yellow;
+      color: black;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: black;
+      color: yellow;
+      border: 1px solid yellow;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Feedback / प्रतिक्रिया</h2>
+    <form onsubmit="return validateForm()">
+      <label for="name">Your Name / आपका नाम</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Your Email / आपका ईमेल</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="contact">Contact No. / संपर्क नंबर</label>
+      <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required />
+
+      <label for="type">Type of Comment / टिप्पणी प्रकार</label>
+      <select id="type" name="type" required>
+        <option value="">Please select / कृपया चयन करें</option>
+        <option value="feedback">Feedback</option>
+        <option value="suggestion">Suggestion</option>
+        <option value="complaint">Complaint</option>
+      </select>
+
+      <label for="comments">Comments / टिप्पणी</label>
+      <textarea id="comments" name="comments" rows="4" required></textarea>
+
+      <div class="button-group">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const contact = document.getElementById('contact').value;
+      if (contact.length !== 10) {
+        alert('Please enter a valid 10-digit contact number.');
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>
